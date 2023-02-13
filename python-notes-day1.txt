@@ -1,0 +1,429 @@
+Python
+------
+
+Language  ----> English
+
+Programs ---> communicate the problem, system will give the solution through
+the selected langugage
+
+Principles of Programming Languages
+
+1. Procedure Oriented  -- C --------------------> Procedure
+
+2. Object Oriented  --- C++, Java ---------------> Object
+
+3. Logic Oriented   --- Prolog ------------------> Recursive functions
+
+4 Functional Prog Languages  -- LISP ------------> Making functions as objects
+
+
+1. General Purpose  -- C, Pacal, LISP
+
+2. Web Application  -- Java, C#
+
+3. Scientific Applications---- C, MatLab, Prolog
+
+
+
+Python
+------
+
+General purpose high-level programming lang, which is used to develop
+any sort of applications of any kind of lang paradigm.
+
+
+1984 ----------> Stable
+
+2000 ----------> inclined
+
+2010  --------> incremental or progressive
+
+
+37- 40 -----> Java / Dotnet
+
+30 -35 ----> Python
+
+
+
+1. simple general applications
+
+2. Web applications which will run in internet
+
+3. games
+
+4. system level programing
+
+5. Web Scarpping
+
+6. Web pages
+
+7. Data science
+
+8. AI
+
+9. ML
+
+10. Live Streaming
+
+11. Visualization
+
+12. Cloud
+
+13. scripting
+
+14. Testing ---> Selenium
+
+15. Microservices
+
+16. 
+
+
+1. Low coding / less number of lines of code
+file = open("f1.txt","r")
+file.read
+
+
+2. Dont have any structure to follow in writing the prog
+
+void main(){
+
+	// executable statements
+}
+
+
+
+
+class Hello{
+		public static void main(String args[]){
+
+		// statements;
+	}
+}
+
+
+write the program -----> Compiled / Interpreted ---> machine understandable format
+----------> excuted
+
+
+test.c ------> 
+
+s1
+s2
+s3
+s4
+
+Gayatri
+Gaya3
+
+
+
+
+
+Basics
+------
+
+1. Identifiers  -- [a-z][A-Z][0-9][all special symbols, relational
+   conditional operators are also, and or not 
+
+print("Hello")-----> monitor
+
+
+
+type
+
+input
+
+< ? > and or 
+
+first =10
+
+
+
+
+
+2. Keywords
+	for i in range(1..10):
+			print(i)
+1
+2
+3
+4
+5
+;
+;
+;10
+
+eg> input, print, for range, while, if elif ,else except, error, 
+    finally, and or not class type
+
+
+
+
+3. Datatypes -- Refers to type of the data with which we are handling
+   in the progarmming lang
+
+	Number, String, Date, Boolean, Collections(Array, List, Set, Dictionary,tuple)
+
+    complex  == a+ib
+
+
+4. variables
+
+dynamic allocation
+
+variable priorly
+
+c=10
+c ---> number
+
+c="praveen"
+c----> str
+
+
+String
+-------
+
+is a collection of characters  ---> array of characters
+
+Program ----> collctions of charcaters
+
+
+capitalize() ----> converts every first letter of word to cap
+
+txt = "hello this is python program, python is useful lang"
+
+txt.capitalize()
+
+
+txt.count("python");
+
+
+
+finds()----> find the given string in the search string and returns the start
+and end index
+
+splitlines()----> split the given string into diff lines
+spliting is done till \n
+
+
+
+complex---->
+
+(x + iy)
+
+(3+4i)  + ( 2 + 3i) == 5 + 7i
+
+(3+4i)  - ( 2 + 3i) == 1 + i
+
+(3 + 4i) * (2 + 3i)  ===>
+
+
+
+6+ 9i + 8i -12
+
+-6+17i
+
+
+x =10
+
+variables name should be in lower case
+
+no spaces are allowed in the variable name
+no special charcaters are allowed except _(underscore)
+it cannt be a reserve word
+
+first number= 10  // invalid
+first@number ---> invalid
+print =20  --> invalid
+
+x =10
+first_number = 20
+__x = valid
+
+Commnets
+--------
+
+# --> single line comment
+
+"""" """"  ---> multi line comment
+
+string assingemet
+
+single quote
+
+double quotes
+
+triple quotes
+
+str = 'hello'  --->valid
+
+str = "hello" ---> valid
+
+str = """ hello """ ---> valid
+""" hello """
+
+
+str = "hello'  ---> invalid
+
+
+input and output methods
+------------------------
+
+input()----> to read values from keyboard
+
+variable = input("display string")
+name = input("enter you name")
+print(name)
+
+
+
+print() ----> to send values to output devices
+
+
+
+
+type casting
+--------------
+Is the process of converting one type to another type
+
+int()---> convert string to int
+str() ---->convert anthing to string
+float() --.> convert string to float
+
+
+
+Control Statements
+------------------
+Those statements which transfer the control from one part of the program
+to another part of the program
+
+s1
+s2
+s3
+s4
+s5
+
+1. conditional based control statements
+eg> if, while, for
+
+
+2. unconditional based control statements
+eg> continue, break, pass
+
+
+if   ---> If is a clause
+--
+
+it is used to select one block out of two blocks, based on the condition
+
+1. simple if
+2. if else
+3. elif
+4. nested if
+
+
+{
+
+}
+
+
+
+sytax of if
+------------
+
+if condition:
+	true block statements
+next statements
+
+
+synatax of if else
+-----------------
+
+if condition:
+	true block
+else:
+	false block
+
+next statement
+
+syntax of elif
+---------------
+
+
+if cond1:
+	s1
+elif cond2:
+	s2
+elif cond3:
+	s3
+elsif  ;
+;
+;
+;
+else:
+	condn
+
+
+nested if
+---------
+if cond1:
+	if cond2:
+		s1
+	else:
+		s2
+else:
+	if cond3:
+		s3
+	else:
+		s4
+
+
+excercises:
+------------
+1. disply your name on the console
+2. read the name and greet with Welcome string.
+3. read the two number and display arthimetics
+4. read two number display the bigger one
+5. read three number display the bigger one
+6. read the number of units and type of connectionof electricity and based on 
+	the following  criteria calculate the power bill
+
+
+						0--100				100-200			>200
+Agriculature 			1						2					3
+
+Industry					3						4					5
+
+domestic					2						3					4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
