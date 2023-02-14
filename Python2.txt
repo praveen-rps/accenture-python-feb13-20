@@ -11,7 +11,7 @@ def add(a,b):
 
 add = lambda a,b:a+b
 
-add(10,20)
+add(10,20)----> 30
 
 
 
@@ -44,8 +44,11 @@ lambda a,b : a if a>b else b
 Pros
 ----
 1. Suitable for simple logical operations
+
 2. When we want one expression in return, we use the lambda expression
+
 3. lambda function is used as a parameter to different functions such as map, filter etc.,
+
 
 Cons
 ----
@@ -71,6 +74,9 @@ we can pass keyword arguments for a lambda expression
 
 product= lambda x,y,z : x*y*z
 
+product(2,3,10)
+product(10,2,3)
+
 product(z=10,x=2,y=3)
 
 
@@ -92,7 +98,8 @@ addition(10,20,30,40)
 addition()
 
 
-higher order lambda expressions, ie we can pass another function / lambda expression to a lamdba expression
+higher order lambda expressions, ie we can pass another 
+function / lambda expression to a lamdba expression
 
 higher_order = lambda x, fun : x + fun(x)
 
@@ -201,6 +208,8 @@ print(newList)
 using filter method
 -------------------
 
+list(filter(lamdba,collection))
+
 
 x=list(filter(lambda, collection))
 
@@ -259,6 +268,23 @@ It is used to roll the result to next number
 
 reduce method is available in functools module so need to import it
 
+
+maths
+
+circle
+rectangle
+triangle
+trapezium
+pyramid
+
+from maths import circle
+from maths import rectangle
+
+
+impor maths
+
+import functools
+
 from functools import reduce
 
 list4 = [2,5,10,6,4,12]
@@ -300,9 +326,12 @@ a+ = to append and read data frpm file, it wont override the previous data
 
 Here are some of the functions in Python that allow you to read and write to files:
 
-    read() 			: This function reads the entire file and returns a string
-    readline() 		: This function reads lines from that file and returns as a string. It fetch the line n, 
-						if it is been called nth time.
+	open()				: This method opens the file for a specific purpose
+
+    read() 				: This function reads the entire file and returns a string
+    readline() 		: This function reads lines from that file and returns as a string. 
+                         It fetch the line n, 
+							if it is been called nth time.
     readlines() 		: This function returns a list where each element is single line of that file.
    
     write() 			: This function writes a fixed sequence of characters to a file.
@@ -310,7 +339,6 @@ Here are some of the functions in Python that allow you to read and write to fil
     append() 			: This function append string to the file instead of overwriting the file.
 
     close()			: will close the given file reference which is opened
-
 
 
 simple steps to read contents from a file
@@ -331,8 +359,8 @@ simple steps to read contents from a file
 	close()
 
 
-
-
+file = open("data.txt","r")
+print(file.read())
 
 
 
@@ -435,7 +463,8 @@ steps to read data using csvreader
 
 
 5. Extract the rows/records. 
-   Create an empty list called rows and iterate through the csvreader object and append each row to the rows list.
+   Create an empty list called rows and iterate through the csvreader object and append each row 
+  to the rows list.
 
    rows = []
    for row in csvreader:
@@ -523,6 +552,15 @@ with open(filename, 'w') as file:
 3. read the data from the csv file, update any field and write back to another csv file
 
 
+
+1. Procedure Oriented------> 
+2. Object Oriented  ------> 
+3. Functional oriented---------> lambda
+
+
+
+
+
 Object Oriented Programming
 ---------------------------
 
@@ -530,11 +568,56 @@ Is making the programming element as if it behaves like a real time entity
 
 features of OOPS
 
-1. class
+1. class       ---> class is a collection of variables(data) and methods(behaviour)
 2. object
-3. encapsulation
-4. polymorphism
-5. inheritance
+
+3. encapsulation  ---> The process of combining the data and member functions
+						  together inside the class 
+	we need encapsulation for security 
+
+4. polymorphism ---> The ability of an entity to exists in more than one form
+	1. compile time polymorphism    --- function /method overloading
+	2. runtime polymorphism -----> method overriding
+
+
+   Trainer,  Trainee  -----> Training
+
+
+
+
+5. inheritance ---> Is the process of acquiring the data/methods from one class
+to another class
+
+inheritance is required for resuability
+
+
+
+6. Access Modifiers  ----  which will speicify the level of the security to data and methods
+							inside the class
+
+		private -----> No one else outside the class can access it
+      	public  -----> every one can access it 
+		protected ----> you class and inherited classes can only access it
+
+	
+
+
+
+
+
+class is a generalization--- imaginary
+object is specification ---- Real time
+
+flowers ------------------> class
+Rose
+lilly
+lotus-------------------> object
+
+ax2 + bx +c=0
+3x2+2x+9=0
+
+
+
 
 
 Every object is identified by its unique nature
@@ -599,7 +682,21 @@ Object Oriented Programming
 syntax:
 
 	class classname:
-		#statements
+		#data / variables
+		# methods
+
+class Demo:
+	pass
+
+
+by default all variables or methods are public in python classes
+
+__ (double underscore ) before any method or variable , then it is declared as private
+
+_(single underscore) before any method or variable, then it is refered to protected
+
+
+
 
 class class_name:
     class body
@@ -648,6 +745,9 @@ class Employee:
 creating a object
 -----------------
 <object-name> = <class-name>(<arguments>)
+
+
+
 c1 = car("Toyota",2020)
 c1.display()
 
@@ -663,6 +763,11 @@ c1.display()
 
 emp1 = Employee("John", 101)  
 emp2 = Employee("David", 102)  
+
+
+
+
+default constuctor or zero parameterized constructor
 
 
 Zero parameterized constructor
@@ -905,9 +1010,102 @@ HourlyBasedEmployee(employee,t,p,q)
 
 
 
+class without any content
+--------------------------
+class Demo:
+    pass
+
+clas with data and methods
+--------------------------
+class Employee:
+    eid = None
+    name = None
+    dept = None		# these are public variables
+    __salary = 90000  # this is a private variable
+    _desg = "Manager"  # this is a protected variable
+    
+    def display(self):
+        print("ID = "+self.eid+" Name = "+self.name+" Dept = "+self.dept)
+        
+    def setData(self):
+        self.eid = "9999"
+        self.name="Kumar"
+        self.dept="Quality"
+        
+    def showSalary(self):
+        print("The salary is : ",self.__salary)
 
 
+emp1 = Employee()
+emp2 = Employee()
+emp3 = Employee()
+emp1.setData()
+emp1.display()
 
+class with default constructor
+--------------------------------
+class Student:
+    htno = None
+    name = None
+    branch = None
+    def __init__(self):
+        print("This method is called automatically")
+        self.htno="1001"
+        self.name="Arun"
+        self.branch="cse"
+        
+    def showDetails(self):
+        print("Htno = "+self.htno+" Name = "+self.name+" Branch = "+self.branch)
+
+s2 = Student()
+s2.showDetails()
+s3 = Student()
+s3.showDetails()
+
+class with parameterized constructor
+-----------------------------------
+class Student1:
+    htno = None
+    name = None
+    branch = None
+  
+    def __init__(self, htno,name,branch):
+        print("This method is called automatically")
+        self.htno=htno
+        self.name=name
+        self.branch=branch
+        
+    
+    def showDetails(self):
+        print("Htno = "+self.htno+" Name = "+self.name+" Branch = "+self.branch)
+
+s4 = Student1("8999","Sai","Civil")
+s4.showDetails()
+s5 = Student1("9001","Sunny","eee")
+s5.showDetails()
+
+Base class
+------------
+class Box2D:
+    length = 1
+    breadth = 2
+    def area(self):
+        print("The area of box is ", (self.length*self.breadth))
+
+Derived Class
+--------------
+class Box3D(Box2D):
+    
+    height = 2
+    
+        
+    def volume(self):
+        print("The volume of box is ",(self.length*self.breadth*self.height))
+
+
+b1 = Box3D()
+b1.area()
+b1.volume()
 
 
 
