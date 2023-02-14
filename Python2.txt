@@ -1,0 +1,1221 @@
+Lambda Expressions
+------------------
+
+A lambda expressions is an anonymous function without a name and without a def keyword
+
+A lambda expression can take any number of arguments but can have only one expression.
+
+def add(a,b):
+	return a+b
+
+
+add = lambda a,b:a+b
+
+add(10,20)
+
+
+
+
+syntax:
+------
+
+lambda argumentlist : expression
+
+
+
+lambda a,b : a+b
+
+
+
+def bigger(a,b):
+		if a > b:
+			return a
+		else:
+			return b
+
+
+
+
+
+
+lambda a,b : a if a>b else b
+
+
+Pros
+----
+1. Suitable for simple logical operations
+2. When we want one expression in return, we use the lambda expression
+3. lambda function is used as a parameter to different functions such as map, filter etc.,
+
+Cons
+----
+1. Lambda can evaluate only one expression
+2. We cannot write a doc-string to explain all inputs, operations and outputs as you would in a normal
+   definition.
+3. Lambda functions are not used when we have multi lines of code.
+
+
+
+in python no need to assign a lambda expression to a variable we can directly call it
+
+(lambda x, y : x*y)(10,20)  --> returns 200
+
+
+# Example of lambda function using if-else
+Max = lambda a, b : a if(a > b) else b
+print(Max(1, 2))
+
+
+
+we can pass keyword arguments for a lambda expression
+
+product= lambda x,y,z : x*y*z
+
+product(z=10,x=2,y=3)
+
+
+we can also use default arguments in lambda expression
+
+product = lambda x,y,z=10 : x*y*z
+product(10,20)
+
+
+
+we can also use * to have variable arguments
+
+addition =lambda *args : sum(args)
+
+
+addition(10,20)
+addition(10,20,30)
+addition(10,20,30,40)
+addition()
+
+
+higher order lambda expressions, ie we can pass another function / lambda expression to a lamdba expression
+
+higher_order = lambda x, fun : x + fun(x)
+
+higher_order(20, lambda x:x*x)
+
+
+(lambda x : (x%2 and 'odd' or 'even'))(10)
+
+
+lambda to check the given string is a substring of a given string or not
+------------------------------------------------------------------------
+sub_string = lambda str : str in "python programming language"
+
+
+sub_string('java')  --> false
+sub_string("python') --> True
+sub_string('Python') ---> False
+
+
+
+List Comprehension
+------------------
+
+fruits = ["apple", "banana", "cherry", "kiwi", "mango"]
+newlist = []
+
+for x in fruits:
+  if "a" in x:
+    newlist.append(x)
+
+print(newlist) 
+
+
+
+nlist = [x for x in fruits if "a" in x ]
+
+
+nlist = [x for x in fruits if "a" in x]
+
+
+Python List comprehension provides a much more short syntax for creating a new list based on the values of an existing list.
+
+Advantages of List Comprehension
+
+    More time-efficient and space-efficient than loops.
+    Require fewer lines of code.
+    Transforms iterative statement into a formula.
+
+syntax:
+-------
+
+newList = [ expression(element) for element in oldList if condition ] 
+
+
+# Using list comprehension to iterate through loop
+List = [character for character in [1, 2, 3]]
+
+
+list = [i for i in range(11) if i % 2 == 0]
+print(list)
+
+
+# Getting square of from 1 to 10
+squares = [n**2 for n in range(1, 11)]
+
+
+# Display square of even numbers
+print(squares)
+
+
+
+matrix = [[j for j in range(3)] for i in range(3)]
+print(matrix)
+
+
+# Reverse each string in tuple
+List = [string[::-1] for string in ('Geeks', 'for', 'Geeks')]
+
+# Display list
+print(List)
+
+
+List comprehension to use user defined function
+-----------------------------------------------
+
+# Explicit function
+def digitSum(n):
+	dsum = 0
+	for ele in str(n):
+		dsum += int(ele)
+	return dsum
+
+
+# Initializing list
+List = [367, 111, 562, 945, 6726, 873]
+
+# Using the function on odd elements of the list
+newList = [digitSum(i) for i in List if i & 1]
+
+# Displaying new list
+print(newList)
+
+
+
+
+using filter method
+-------------------
+
+
+x=list(filter(lambda, collection))
+
+
+num = [10,40,56,27,33,15,70]
+
+f1 = lambda x : x > 30
+
+x = list(filter(f1,num))
+print(x)
+
+
+
+filter(lambda n : n >30, num)
+
+
+greater = list(filter(lambda num: num >30, num))
+print(greater)
+
+
+
+data = [10,40,56,27,33,15,70]
+result = list(filter(lambda x: x%4==0, data))
+
+
+
+Filter out all odd numbers using filter() and lambda function
+-------------------------------------------------------------
+li = [5, 7, 22, 97, 54, 62, 77, 23, 73, 61]
+ 
+final_list = list(filter(lambda x: (x % 2 != 0), li))
+print(final_list)
+
+
+
+
+
+Map method
+----------
+data = [10,40,56,27,33,15,70]
+result = list( map(lambda x: x+1, data))
+print(result)
+
+
+# using lambda to print table of 10 using list comprehension
+numbers = list(map(lambda i: i*10, [i for i in range(1, 6)])) // [1,2,3,4,5]
+
+print(numbers)
+
+
+
+
+Reduce Method
+--------------
+It is used to roll the result to next number
+
+reduce method is available in functools module so need to import it
+
+from functools import reduce
+
+list4 = [2,5,10,6,4,12]
+sum = reduce( (lambda x,y : x*y), list4)
+print(sum)
+
+
+using lambda in user defined function
+-------------------------------------
+
+>>> def quadratic(a,b,c):
+...     return lambda x: a*x**2 + b*x +c
+...
+>>> f= quadratic(2,3,5)
+>>> f(1)
+>>> f(2)
+
+
+
+
+File Handling
+-------------
+
+f = open(filename, mode)
+
+modes are:
+
+r = read 
+w = write an existing a file
+
+a: appending a data, it wont overrides existing data
+
+r+ = to read and write the data, previous data will be overriden
+
+w+ = to write and read data, it will override the previous data
+
+a+ = to append and read data frpm file, it wont override the previous data
+
+
+Here are some of the functions in Python that allow you to read and write to files:
+
+    read() 			: This function reads the entire file and returns a string
+    readline() 		: This function reads lines from that file and returns as a string. It fetch the line n, 
+						if it is been called nth time.
+    readlines() 		: This function returns a list where each element is single line of that file.
+   
+    write() 			: This function writes a fixed sequence of characters to a file.
+    writelines() 		: This function writes a list of string.
+    append() 			: This function append string to the file instead of overwriting the file.
+
+    close()			: will close the given file reference which is opened
+
+
+
+simple steps to read contents from a file
+-------------------------------------------
+
+1. open the file reference in read mode
+	f = open(filenmae,mode)
+
+2. read the content from the file
+	f.read() / f.readline() / f.readlines()
+
+
+3. process the content // display the content on the output console
+	display the read content on monitor
+	
+
+4. close the file reference.
+	close()
+
+
+
+
+
+
+
+to read and print the contents of a file
+----------------------------------------
+
+# a file named "geek", will be opened with the reading mode.
+file = open('geek.txt', 'r')
+# This will print every line one by one in the file
+for each in file:
+	print (each)
+
+
+file.read() // this will display total contents atonce
+
+
+print (file.read(5)) // this will print the first 5 characters from the file
+
+
+To write the contents to a file
+-------------------------------
+# Python code to create a file
+file = open('sample.txt','w')
+file.write("This is the write command")
+file.write("It allows us to write in a particular file")
+file.close()
+
+
+
+to use append method in file ops
+--------------------------------
+# Python code to illustrate append() mode
+file = open('sample.txt', 'a')
+file.write("This will add this line")
+file.close()
+
+
+# Python code to illustrate with()   # from 2.7 version 
+
+with open("file.txt") as file:
+	data = file.read()
+# do something with data
+
+
+
+# Python code to illustrate with() alongwith write()
+with open("file.txt", "w") as f:
+	f.write("Hello World!!!")
+
+
+# Python code to illustrate split() function
+with open("d://sample.txt", "r") as file:
+	data = file.readlines()
+	for line in data:
+		word = line.split()
+		print (word)
+
+
+
+Working with csv files
+----------------------
+
+What is a CSV?
+
+CSV stands for “Comma Separated Values.” 
+It is the simplest form of storing data in tabular form as plain text
+
+structure of csv file
+---------------------
+
+experience,salary
+1.1,45000
+2,60000
+2.1,62000
+1,40000
+
+
+to read data from csv file, we have many ways one of its is using csvreader
+
+steps to read data using csvreader
+
+1. import csv from library
+
+	import csv
+
+2. open the csv file
+	file = open("test.csv")
+
+3. Use the csv.reader object to read the CSV file.
+    csvreader = csv.reader(file)
+
+4. Extract the field names.
+	
+	Create an empty list called a header. Use the next() method to obtain the header.
+
+	The .next() method returns the current row and moves to the next row.
+
+     header = []		
+	header = next(csvreader)
+
+
+5. Extract the rows/records. 
+   Create an empty list called rows and iterate through the csvreader object and append each row to the rows list.
+
+   rows = []
+   for row in csvreader:
+        rows.append(row)
+   rows
+
+6. Close the file
+    file.close()
+
+
+using with keyword
+------------------
+
+import csv
+rows = []
+with open("Salary_Data.csv", 'r) as file:
+    csvreader = csv.reader(file)
+    header = next(csvreader)
+    for row in csvreader:
+        rows.append(row)
+print(header)
+print(rows)
+
+
+by using readLines method also we can fetch data from csv files
+---------------------------------------------------------------
+with open('Salary_Data.csv') as file:
+    content = file.readlines()
+header = content[:1]
+rows = content[1:]
+print(header)
+print(rows)
+
+
+
+Steps to write to a csv file
+----------------------------
+
+1. Import csv library.
+2. Define a filename and Open the file using open().
+3. Create a csvwriter object using csv.writer().
+4. Write the header.
+5. Write the rest of the data.
+
+
+header = ['Name', 'M1 Score', 'M2 Score']
+data = [
+			['Alex', 62, 80], 
+			['Brad', 45, 56], 
+			['Joey', 85, 98]
+		]
+
+
+filename = 'd://Students_Data1.csv'
+with open(filename, 'w', newline="") as file:
+    csvwriter = csv.writer(file) # 2. create a csvwriter object
+    csvwriter.writerow(header) # 4. write the header
+    csvwriter.writerows(data) # 5. write the rest of the data
+
+
+
+using writeLines() method
+-------------------------
+header = ['Name', 'M1 Score', 'M2 Score']
+data = [['Alex', 62, 80], ['Brad', 45, 56], ['Joey', 85, 98]]
+filename = 'Student_scores.csv'
+with open(filename, 'w') as file:
+    for header in header:
+        file.write(str(header)+', ')
+    file.write('n')
+    for row in data:
+        for x in row:
+            file.write(str(x)+', ')
+        file.write('n')
+
+
+
+1. copying the contents from one file to another
+   two file references one for read, write
+	read the data from read mode file and write back to the write mode file
+
+2. copying the contents from one csv file to anoth csv
+   
+
+3. read the data from the csv file, update any field and write back to another csv file
+
+
+Object Oriented Programming
+---------------------------
+
+Is making the programming element as if it behaves like a real time entity
+
+features of OOPS
+
+1. class
+2. object
+3. encapsulation
+4. polymorphism
+5. inheritance
+
+
+Every object is identified by its unique nature
+If i group the objects which are having the same nature,
+then that group is called a class
+
+Students of V sem----> 
+
+An object is an instance of a class
+
+
+class is a generic entity
+object is a real time entity
+
+
+ax2 + bx +c  ----> generic
+
+3x2 + 4x+ 1  ---> specific
+
+
+
+
+1. data
+2. functions / operations
+
+
+class classname:
+	# memebers
+
+
+
+class Test:
+	pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Object Oriented Programming
+---------------------------
+
+syntax:
+
+	class classname:
+		#statements
+
+class class_name:
+    class body
+
+class Car:
+    pass
+
+obj1 = Car()
+
+
+adding a constructor
+--------------------
+class Car:
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+
+
+class Car:
+    car_type = "Sedan"                 #class attribute
+    def __init__(self, name, color):
+        self.name = name               #instance attribute   
+        self.color = color             #instance attribute
+
+
+
+class car:  
+    def __init__(self,modelname, year):  
+        self.modelname = modelname  
+        self.year = year  
+    def display(self):  
+        print(self.modelname,self.year)  
+
+
+
+eg>
+
+class Employee:    
+    id = 10   
+    name = "Devansh"    
+    def display (self):    
+        print(self.id,self.name) 
+
+
+
+creating a object
+-----------------
+<object-name> = <class-name>(<arguments>)
+c1 = car("Toyota",2020)
+c1.display()
+
+
+    class Employee:  
+    def __init__(self, name, id):  
+        self.id = id  
+        self.name = name  
+  
+    def display(self):  
+        print("ID: %d \nName: %s" % (self.id, self.name)) 
+
+
+emp1 = Employee("John", 101)  
+emp2 = Employee("David", 102)  
+
+
+Zero parameterized constructor
+------------------------------
+
+class Student:  
+    # Constructor - non parameterized  
+    def __init__(self):  
+        print("This is non parametrized constructor")  
+    def show(self,name):  
+        print("Hello",name)  
+student = Student()  
+student.show("John")   
+
+default constructor
+------------------
+
+    class Student:  
+        roll_num = 101  
+        name = "Joseph"  
+
+		def __init__(self):
+			pass
+      
+        def display(self):  
+            print(self.roll_num,self.name) 
+
+
+	class Employee:
+			empid = 1001
+			ename = "Praveen"
+			dept = "Testing"
+
+			def showDetails():
+				print(empid, ename,dept)
+	 
+
+	objectName = classname();
+ 
+      
+    st = Student()  
+    st.display()  
+
+
+
+
+Constructor
+-----------
+
+Default or zero paratmeterized constructor
+
+parameterized constructor
+
+
+Inheritance:
+------------
+
+Class BaseClass:
+    {Body}
+Class DerivedClass(BaseClass):
+    {Body}
+
+
+# A Python program to demonstrate inheritance
+
+
+class Person(object):
+
+# Constructor
+def __init__(self, name, id):
+	self.name = name
+	self.id = id
+
+# To check if this person is an employee
+def Display(self):
+	print(self.name, self.id)
+
+
+# Driver code
+emp = Person("Satyam", 102) # An Object of Person
+emp.Display()
+
+
+class Emp(Person):
+
+def Print(self):
+	print("Emp class called")
+	
+Emp_details = Emp("Mayank", 103)
+
+# calling parent class function
+Emp_details.Display()
+
+# Calling child class function
+Emp_details.Print()
+
+
+
+
+# A Python program to demonstrate inheritance
+
+# Base or Super class. Note object in bracket.
+# (Generally, object is made ancestor of all classes)
+# In Python 3.x "class Person" is
+# equivalent to "class Person(object)"
+
+
+class Person(object):
+
+	# Constructor
+	def __init__(self, name):
+		self.name = name
+
+	# To get name
+	def getName(self):
+		return self.name
+
+	# To check if this person is an employee
+	def isEmployee(self):
+		return False
+
+
+# Inherited or Subclass (Note Person in bracket)
+class Employee(Person):
+
+	# Here we return true
+	def isEmployee(self):
+		return True
+
+
+# Driver code
+emp = Person("Geek1") # An Object of Person
+print(emp.getName(), emp.isEmployee())
+
+emp = Employee("Geek2") # An Object of Employee
+print(emp.getName(), emp.isEmployee())
+
+
+
+
+
+Subclassing (Calling constructor of parent class)
+
+# Python code to demonstrate how parent constructors
+# are called.
+
+# parent class
+class Person(object):
+
+	# __init__ is known as the constructor
+	def __init__(self, name, idnumber):
+		self.name = name
+		self.idnumber = idnumber
+
+	def display(self):
+		print(self.name)
+		print(self.idnumber)
+
+# child class
+
+
+class Employee(Person):
+	def __init__(self, name, idnumber, salary, post):
+		self.salary = salary
+		self.post = post
+
+		# invoking the __init__ of the parent class
+		Person.__init__(self, name, idnumber)
+
+
+# creation of an object variable or an instance
+a = Employee('Rahul', 886012, 200000, "Intern")
+
+# calling a function of the class Person using its instance
+a.display()
+
+
+Python program to demonstrate error if we forget to invoke __init__() of the parent
+------------------------------------------------------------------------------------
+
+class A:  
+	def __init__(self, n):
+		self.name = n
+
+
+class B(A):
+	def __init__(self, name,roll):
+		self.roll = roll
+		self.name=name
+
+B = B + A
+
+object = B(23)
+print(object.name)
+
+
+
+
+Inheritance: It is process of acquring the properties from one class to another class
+The class which is giving properties is called base / parent class
+the class which is acquiring properties is called derived / child class
+
+
+1. Single Inheritance
+
+parent ----------> child
+
+
+2. multilevel inheritance
+
+parent ----------> child -------------> grandchild
+
+
+3. multiple inheritance
+
+two or more base classes will give properties simulteanously to derived class
+
+4. Hierarchy Inheritance
+
+There will be a hierarchy of any child class
+
+
+
+
+
+class Box2D---> length, breadth
+
+class Box3D  ---> Box2D, height
+
+
+
+Employee(name,empid,dept,desg,doj,exp)
+
+PermanentEmployee(employee,x,y,z)
+
+TemporaryEmployee(employee,a,b)
+
+HourlyBasedEmployee(employee,t,p,q)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Different types of Inheritance:
+---------------------------------
+    Single inheritance: 
+    Multiple inheritances: 
+
+multiple Inheritances
+---------------------
+# Python example to show the working of multiple
+# inheritance
+
+
+class Base1(object):
+	def __init__(self):
+		self.str1 = "Geek1"
+		print("Base1")
+
+
+class Base2(object):
+	def __init__(self):
+		self.str2 = "Geek2"
+		print("Base2")
+
+
+class Derived(Base1, Base2):
+	def __init__(self):
+
+		# Calling constructors of Base1
+		# and Base2 classes
+		Base1.__init__(self)
+		Base2.__init__(self)
+		print("Derived")
+
+	def printStrs(self):
+		print(self.str1, self.str2)
+
+
+ob = Derived()
+ob.printStrs()
+
+
+Multilevel Inheritance
+----------------------
+# A Python program to demonstrate inheritance
+
+# Base or Super class. Note object in bracket.
+# (Generally, object is made ancestor of all classes)
+# In Python 3.x "class Person" is
+# equivalent to "class Person(object)"
+
+
+class Base(object):
+
+	# Constructor
+	def __init__(self, name):
+		self.name = name
+
+	# To get name
+	def getName(self):
+		return self.name
+
+
+# Inherited or Sub class (Note Person in bracket)
+class Child(Base):
+
+	# Constructor
+	def __init__(self, name, age):
+		Base.__init__(self, name)
+		self.age = age
+
+	# To get name
+	def getAge(self):
+		return self.age
+
+# Inherited or Sub class (Note Person in bracket)
+
+
+class GrandChild(Child):
+
+	# Constructor
+	def __init__(self, name, age, address):
+		Child.__init__(self, name, age)
+		self.address = address
+
+	# To get address
+	def getAddress(self):
+		return self.address
+
+
+# Driver code
+g = GrandChild("Geek1", 23, "Noida")
+print(g.getName(), g.getAge(), g.getAddress())
+
+
+
+
+
+class Parent:
+	statements;
+
+class Child(Parent):
+
+	statments
+
+child = child + parent
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Single Inheritance
+-------------------
+# Python program to demonstrate
+# single inheritance
+
+# Base class
+class Parent:
+	def func1(self):
+		print("This function is in parent class.")
+
+# Derived class
+
+
+class Child(Parent):
+	def func2(self):
+		print("This function is in child class.")
+
+
+# Driver's code
+object = Child()
+object.func1()
+object.func2()
+
+Multilevel Inheritance
+-----------------------
+# Python program to demonstrate
+# multilevel inheritance
+
+# Base class
+
+
+class Grandfather:
+
+	def __init__(self, grandfathername):
+		self.grandfathername = grandfathername
+
+# Intermediate class
+
+
+class Father(Grandfather):
+	def __init__(self, fathername, grandfathername):
+		self.fathername = fathername
+
+		# invoking constructor of Grandfather class
+		Grandfather.__init__(self, grandfathername)
+
+# Derived class
+
+
+class Son(Father):
+	def __init__(self, sonname, fathername, grandfathername):
+		self.sonname = sonname
+
+		# invoking constructor of Father class
+		Father.__init__(self, fathername, grandfathername)
+
+	def print_name(self):
+		print('Grandfather name :', self.grandfathername)
+		print("Father name :", self.fathername)
+		print("Son name :", self.sonname)
+
+
+# Driver code
+s1 = Son('Prince', 'Rampal', 'Lal mani')
+print(s1.grandfathername)
+s1.print_name()
+
+
+Multiple Inheritance
+--------------------
+# Python program to demonstrate
+# multiple inheritance
+
+# Base class1
+class Mother:
+	mothername = ""
+
+	def mother(self):
+		print(self.mothername)
+
+
+
+# Base class2
+class Father:
+	fathername = ""
+
+	def father(self):
+		print(self.fathername)
+
+# Derived class
+
+
+class Son(Mother, Father):
+	def parents(self):
+		print("Father :", self.fathername)
+		print("Mother :", self.mothername)
+
+
+# Driver's code
+s1 = Son()
+s1.fathername = "RAM"
+s1.mothername = "SITA"
+s1.parents()
+
+
+Hierarchical Inheritance
+-------------------------
+# Python program to demonstrate
+# Hierarchical inheritance
+
+
+# Base class
+class Parent1:
+	def func1(self):
+		print("This function is in parent class.")
+
+# Derived class1
+
+
+class Child1(Parent):
+	def func2(self):
+		print("This function is in child 1.")
+
+# Derivied class2
+
+
+class Child2(Parent):
+	def func3(self):
+		print("This function is in child 2.")
+
+
+# Driver's code
+object1 = Child1()
+object2 = Child2()
+object1.func1()
+object1.func2()
+object2.func1()
+object2.func3()
+
+
+Hybrid Inheritance
+-------------------
+# Python program to demonstrate
+# hybrid inheritance
+
+
+class School:
+	def func1(self):
+		print("This function is in school.")
+
+
+class Student1(School):
+	def func2(self):
+		print("This function is in student 1. ")
+
+
+class Student2(School):
+	def func3(self):
+		print("This function is in student 2.")
+
+
+class Student3(Student1, School):
+	def func4(self):
+		print("This function is in student 3.")
+
+
+# Driver's code
+object = Student3()
+object.func1()
+object.func2()
+
+
+
+
+
+
