@@ -1,0 +1,120 @@
+Steps:
+------
+
+1. open the mysql command prompt and create a new database and create a table called orders in it
+
+mysql> create database accenture;
+mysql> use accenture;
+mysql> create table orders(oid int, orderitem varchar(20), quantity int);
+
+
+
+
+
+2. write the below code and as it as mysqldbconnect.py 
+
+import mysql.connector
+from mysql.connector import Error
+
+
+try:
+	conn  =mysql.connector.connect("localhost","accenture","root","root")
+	if conn:
+		print("Database connection established")
+	else:
+		print("Not connected")
+except(Exception,Error) as error:
+	print(error)
+
+3. save and execute the above code.
+
+d:> python mysqldbconnect.py
+
+
+
+4. create a configuration file called "local.env" and copy the below configurations
+[DB]
+username = root
+password = root
+host = localhost
+port = 3306
+database = accenture
+
+save and close
+
+
+5. write the below code for reading the configurations from the config file and save as readdbconfig.py
+
+# This program will read the configuration properties 
+# from the configuration file 
+
+import configparser
+
+def read_db_params():
+	# read the properties from env file
+
+	config = configparser.ConfigParser()
+	config.read('local.env')
+	return config
+save and close
+
+
+6. write the below code for establishing  the connection and save as connectmysqldbconfigs.py
+
+import mysql.connector
+from mysql.connector import Error
+
+from readdbconfig import *
+
+def connect():
+	try:
+		# read the env file and get the configurations
+		params = read_db_params()
+		
+		conn = mysql.connector.connect(
+				 host = params.get('DB','host'),
+				 database = params.get('DB','database'),
+				 user = params.get('DB','username'),
+				 password = params.get('DB','password'),
+				 port = params.get('DB','port')
+		)
+		return conn
+	except(Exception, Error) as error:
+		print(error)
+
+save and close
+
+
+7. write the below code to insert a record into orders table and save as insertdata.py
+
+# python program to read the data from keyboard and insert into table
+from connectmysqldbconfigs import *
+
+
+try:
+	conn = connect()
+	cursor = conn.cursor()
+	sql = "insert into orders(oid,orderitem,quantity) values (%s,%s,%s)"
+
+	toid = int(input("Enter order id"))
+	titem = input("Enter order item name")
+	tqty = int(input("Enter order quantity"))
+	
+	data = [(toid,titem,tqty)]
+   
+	cursor.executemany(sql,data)
+	conn.commit()
+	print("Record inserted....")
+
+except(Exception,Error) as error:
+	print("error")
+   
+save and execute
+
+8. d:>python insertdata.py
+enter the detaials from the keyboard
+
+
+9. open the mysql and execute the command
+	select * from orders;
+
