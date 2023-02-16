@@ -249,3 +249,43 @@ def update(conn,eid):
 if __name__=='__main__':
 	update(connect(),int(input("enter order id to update")))
 
+
+pip install <modulename>
+
+pip install pandas
+pip install sqllite3
+
+
+
+Working with SQLite database
+----------------------------
+import pandas as pd
+import sqlite3
+conn = sqlite3.connect('testdb.db') 
+c = conn.cursor()
+c.execute('''
+          CREATE TABLE IF NOT EXISTS items
+          ([product_id] INTEGER PRIMARY KEY, [product_name] TEXT)
+          ''')
+c.execute('''
+          INSERT INTO items (product_id, product_name)
+
+                VALUES
+                (1,'Computer'),
+                (2,'Printer'),
+                (3,'Tablet'),
+                (4,'Desk'),
+                (5,'Chair')
+          ''')
+c.execute('''
+          SELECT
+          * from
+          items
+          ''')
+df = pd.DataFrame(c.fetchall(), columns=['product_name','price'])
+print (df)
+
+
+
+
+
