@@ -1,6 +1,13 @@
 Steps:
 ------
 
+step 0 . install mysql.connector by executing below command at the
+command prompt
+
+c:/> pip install mysql.connector
+
+
+
 1. open the mysql command prompt and create a new database and create a table called orders in it
 
 mysql> create database accenture;
