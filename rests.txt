@@ -1,0 +1,407 @@
+REST - Representational State Transfer
+--------------------------------------
+
+REST stands for representational state transfer and is a software architecture style that 
+defines a pattern for client and server communications over a network. 
+
+
+REST provides a set of constraints for software architecture to promote performance, 
+scalability, simplicity, and reliability in the system.
+
+
+A REST web service is any web service that adheres to REST architecture constraints. 
+These web services expose their data to the outside world through an API. 
+
+REST APIs provide access to web service data through public web URLs.
+
+For example, here’s one of the URLs for GitHub’s REST API:
+
+https://api.github.com/users/<username>
+
+
+HTTP Methods
+------------
+
+REST APIs listen for HTTP methods like GET, POST, and DELETE 
+to know which operations to perform on the web service’s resources.
+
+
+A resource is any data available in the web service that can be accessed and manipulated 
+with HTTP requests to the REST API. 
+
+The HTTP method tells the API which action to perform on the resource.
+
+Most commonly used HTTP methods
+
+
+HTTP method 				Description
+-----------				-----------
+GET 						Retrieve an existing resource.
+POST 						Create a new resource.
+PUT 						Update an existing resource.
+PATCH 						Partially update an existing resource.
+DELETE 						Delete a resource.
+
+
+Status Codes
+------------
+
+Once a REST API receives and processes an HTTP request, it will return an HTTP response. 
+
+Included in this response is an HTTP status code. 
+
+This code provides information about the results of the request. 
+
+An application sending requests to the API can check the status code and perform actions 
+based on the result. 
+
+These actions could include handling errors or displaying a success message to a user.
+
+
+Code 	Meaning 				Description
+----	-------				------------
+200 	OK 						The requested action was successful.
+201 	Created 				A new resource was created.
+202 	Accepted 				The request was received, but no modification has been made yet.
+204 	No Content 				The request was successful, but the response has no content.
+400 	Bad Request 			The request was malformed.
+401 	Unauthorized 			The client is not authorized to perform the requested action.
+404 	Not Found 				The requested resource was not found.
+
+415 	Unsupported Media Type 	The request data format is not supported by the server.
+422 	Unprocessable Entity 	The request data was properly formatted but contained invalid or missing data.
+500 	Internal Server Error 	The server threw an error when processing the request.
+
+
+API Endpoints
+--------------
+A REST API exposes a set of public URLs that client applications use to access the resources 
+of a web service. 
+
+These URLs, in the context of an API, are called endpoints.
+
+
+These endpoints are for a customer resource that represents potential customers in the 
+system: 
+
+
+HTTP method 		API endpoint 						Description
+-----------		------------						------------
+GET 				/customers 						Get a list of customers.
+GET 				/customers/<customer_id> 		Get a single customer.
+POST 				/customers 						Create a new customer.
+PUT 				/customers/<customer_id> 		Update a customer.
+PATCH 				/customers/<customer_id> 		Partially update a customer.
+DELETE 			   /customers/<customer_id> 	    Delete a customer.
+
+
+REST and Python: Consuming APIs
+-------------------------------
+
+python -m pip install requests
+
+
+
+Request Object will have ----> method, data/payload, headers (parameters)
+
+Response Object will have ----> response code, response description, paylad
+
+Methods in Request Object
+-------------------------
+
+Method 							Description
+------								------------
+delete(url, args) 				    Sends a DELETE request to the specified url
+get(url, params, args) 			Sends a GET request to the specified url
+head(url, args) 					Sends a HEAD request to the specified url
+patch(url, data, args) 			Sends a PATCH request to the specified url
+post(url, data, json, args) 	   Sends a POST request to the specified url
+put(url, data, args) 			   Sends a PUT request to the specified url
+request(method, url, args) 		Sends a request of the specified method to the specified url
+
+
+
+Methods in response Object
+--------------------------
+
+Method							Descritpion
+------							-----------						
+apparent_encoding 			    Returns the apparent encoding
+
+close() 						Closes the connection to the server
+
+content 						Returns the content of the response, in bytes
+
+cookies 						Returns a CookieJar object with the cookies sent back from the 
+								server elapsed Returns a timedelta object with the time elapsed 
+								from sending the request to the arrival of the response
+
+encoding 						Returns the encoding used to decode r.text
+
+headers							Returns a dictionary of response headers
+
+history						Returns a list of response objects holding the history of request 
+								(url)
+
+is_permanent_redirect 		Returns True if the response is the permanent redirected url, 
+								otherwise False
+
+is_redirect 					Returns True if the response was redirected, otherwise False
+
+iter_content() 				Iterates over the response
+
+iter_lines() 					Iterates over the lines of the response
+
+json()							Returns a JSON object of the result 
+								(if the result was written in JSON format, if not it raises an error)
+
+links 							Returns the header links
+
+next 							Returns a PreparedRequest object for the next request in a 
+								redirection
+
+ok 								Returns True if status_code is less than 400, otherwise False
+
+raise_for_status() 			If an error occur, this method returns a HTTPError object
+
+reason 						Returns a text corresponding to the status code
+
+request 						Returns the request object that requested this response
+
+status_code 					Returns a number that indicates the status 
+								(200 is OK, 404 is Not Found)
+
+text 							Returns the content of the response, in unicode
+
+url 							Returns the URL of the response
+
+Get
+---
+
+>>> import requests
+>>> api_url = "https://jsonplaceholder.typicode.com/todos/1"
+>>> response = requests.get(api_url)
+>>> response.json()
+
+
+Post
+----
+>>> import requests
+>>> api_url = "https://jsonplaceholder.typicode.com/todos"
+>>> todo = {"userId": 1, "title": "Buy milk", "completed": False}
+>>> response = requests.post(api_url, json=todo)
+>>> response.json()
+
+
+If you don’t use the json keyword argument to supply the JSON data, 
+then you need to set Content-Type accordingly and serialize the JSON manually. 
+
+Here’s an equivalent version to the previous code:
+
+
+>>> import requests
+>>> import json
+>>> api_url = "https://jsonplaceholder.typicode.com/todos"
+>>> todo = {"userId": 1, "title": "Buy milk", "completed": False}
+>>> headers =  {"Content-Type":"application/json"}
+>>> response = requests.post(api_url, data=json.dumps(todo), headers=headers)
+>>> response.json()
+{'userId': 1, 'title': 'Buy milk', 'completed': False, 'id': 201}
+
+
+Put
+---
+>>> import requests
+>>> api_url = "https://jsonplaceholder.typicode.com/todos/10"
+>>> response = requests.get(api_url)
+>>> response.json()
+{'userId': 1, 'id': 10, 'title': 'illo est ... aut', 'completed': True}
+
+>>> todo = {"userId": 1, "title": "Wash car", "completed": True}
+>>> response = requests.put(api_url, json=todo)
+>>> response.json()
+{'userId': 1, 'title': 'Wash car', 'completed': True, 'id': 10}
+
+>>> response.status_code
+
+
+PATCH
+-----
+Next up, you’ll use requests.patch() to modify the value of a specific field on an existing 
+todo. PATCH differs from PUT in that it doesn’t completely replace the existing resource. 
+It only modifies the values set in the JSON sent with the request.
+
+
+You’ll use the same todo from the last example to try out requests.patch(). 
+Here are the current values:
+
+{'userId': 1, 'title': 'Wash car', 'completed': True, 'id': 10}
+
+Now you can update the title with a new value:
+
+>>> import requests
+>>> api_url = "https://jsonplaceholder.typicode.com/todos/10"
+>>> todo = {"title": "Mow lawn"}
+>>> response = requests.patch(api_url, json=todo)
+>>> response.json()
+{'userId': 1, 'id': 10, 'title': 'Mow lawn', 'completed': True}
+
+>>> response.status_code
+200
+
+
+DELETE
+------
+Last but not least, if you want to completely remove a resource, 
+then you use DELETE. Here’s the code to remove a todo:
+
+
+>>> import requests
+>>> api_url = "https://jsonplaceholder.typicode.com/todos/10"
+>>> response = requests.delete(api_url)
+>>> response.json()
+{}
+
+>>> response.status_code
+200
+
+
+
+
+1. requests
+
+2. urllib3
+
+
+
+import urllib3
+
+http = urllib3.PoolManager(num_pools=3)
+
+response1 = http.request("GET", "http://www.stackabuse.com")
+response2 = http.request("GET", "http://www.google.com")
+
+
+
+GET Method
+----------
+http = urllib3.PoolManager()
+
+response = http.request("GET", "http://jsonplaceholder.typicode.com/posts/")
+
+print(response.data.decode("utf-8"))
+
+
+Send HTTP GET Request with Parameters
+-------------------------------------
+http = urllib3.PoolManager()
+
+response = http.request("GET",
+                        "http://jsonplaceholder.typicode.com/posts/", 
+                        fields={"id": "1"})
+
+print(response.data.decode("utf-8"))
+
+
+
+HTTP POST Request
+------------------
+http = urllib3.PoolManager()
+response = http.request("POST", "http://jsonplaceholder.typicode.com/posts", 
+fields={"title": "Created Post", "body": "Lorem ipsum", "userId": 5})
+
+print(response.data.decode("utf-8"))
+
+
+
+HTTP DELETE Request
+-------------------
+
+http = urllib3.PoolManager()
+for i in range(1, 5):
+    response = http.request("DELETE", "http://jsonplaceholder.typicode.com/posts", 
+	fields={"id": i})
+    print(response.data.decode("utf-8"))
+
+
+
+http PATCH Request
+------------------
+data = {
+    'title': 'Updated title',
+    'body': 'Updated body'
+}
+
+http = urllib3.PoolManager()
+
+response = http.request("GET", "http://jsonplaceholder.typicode.com/posts/1")
+print(response.data.decode('utf-8'))
+
+response = http.request("PATCH", "https://jsonplaceholder.typicode.com/posts/1", fields=data)
+print(response.data.decode('utf-8'))
+
+
+Send Secure HTTPS Requests in Python with urllib3
+-------------------------------------------------
+pip install certifi
+
+With certifi.where(), we reference the installed Certificate Authority (CA). 
+This is an entity that issues digital certificates, which can be trusted. 
+All these trusted certificates are contained in the certifi module:
+
+
+import urllib3
+import certifi
+
+http = urllib3.PoolManager(ca_certs=certifi.where())
+response = http.request("GET", "https://httpbin.org/get")
+
+print(response.status)
+
+
+Uploading Files with urllib3
+----------------------------
+Using urllib3, we can also upload files to a server. 
+
+To upload files, we encode the data as multipart/form-data, and pass in the filename as well 
+
+as its contents as a tuple of file_name: file_data.
+
+To read the contents of a file, we can use Python's built-in read() method:
+
+
+import urllib3
+import json
+
+with open("file_name.txt") as f:
+    file_data = f.read()
+
+# Sending the request.
+resp = urllib3.request(
+    "POST",
+    "https://reqbin.com/post-online",
+    fields= {
+       "file": ("file_name.txt", file_data),
+    }
+)
+
+print(json.loads(resp.data.decode("utf-8"))["files"])
+
+
+
+
+
+
+
+
+flask
+Django
+
+
+Fast API
+
+
+
+
+
+
